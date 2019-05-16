@@ -1,58 +1,52 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
 
 class Job extends Component {
-  state = {
-    job: [
-      {
-        title: "Frontend Developer",
-        company: "Best Company",
-        location: {
-          city: "Kuala Lumpur",
-          country: "Malaysia"
-        },
-        salary: 5000
-      },
-      {
-        title: "Backend Developer",
-        company: "Second Best Company",
-        location: {
-          city: "Melaka",
-          country: "Malaysia"
-        },
-        salary: 4500
-      },
-      {
-        title: "DevOps Engineer",
-        company: "Third Best Company",
-        location: {
-          city: "Petaling Jaya",
-          country: "Malaysia"
-        },
-        salary: 5000
-      }
-    ]
-  };
   render() {
-    const job = this.state.job.map(job => {
-      return (
-        <div className="card">
-          <div className="card-header text-primary">{job.title}</div>
-          <div className="card-body">
-            <strong>{job.company}</strong>
-            <br />
-            {job.location.city} {job.location.country}
-            <br />
-            Salary: RM {job.salary}
-          </div>
-        </div>
-      );
-    });
+    const { jobs } = this.props;
 
-    return <div className="container">{job}</div>;
+    return (
+      <div className="container">
+        <div className="row">
+          {jobs
+            ? jobs.map(j => {
+                return (
+                  <div className="col-3 mb-2">
+                    <div className="card">
+                      <div className="card-header text-success">{j.title}</div>
+                      <div className="card-body">
+                        <strong>{j.hiringCompany}</strong>
+                        <br />
+                        {j.city}, {j.country}
+                        <br />
+                        Salary: RM {j.salary}
+                      </div>
+                    </div>
+                    <input
+                      type="submit"
+                      className="btn btn-outline-success btn-block"
+                      value="Apply Now"
+                    />
+                  </div>
+                );
+              })
+            : null}
+        </div>
+      </div>
+    );
   }
 }
 
-Job.propTypes = {};
+Job.propTypes = {
+  firestore: PropTypes.object.isRequired
+};
 
-export default Job;
+export default compose(
+  firestoreConnect([{ collection: "jobs" }]),
+  connect(state => ({
+    jobs: state.firestore.ordered.jobs
+  }))
+)(Job);
