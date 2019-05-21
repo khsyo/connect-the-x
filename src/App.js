@@ -6,6 +6,7 @@ import store from "./store";
 
 import AppNavBar from "./components/layout/AppNavBar";
 import Job from "./components/layout/Job";
+import JobDetail from "./components/layout/JobDetail";
 
 function App() {
   return (
@@ -13,12 +14,10 @@ function App() {
       <Router>
         <div className="App">
           <AppNavBar />
-          <div className="container">
-            <h1>
-              Job Listings <i className="fas fa-arrow-up" />
-            </h1>
-            <Job />
-          </div>
+          <Switch>
+            <Route exact path="/" component={Job} />
+            <Route exact path="/job/:id" component={JobDetail} />
+          </Switch>
         </div>
       </Router>
     </Provider>

@@ -1,14 +1,14 @@
 import React from "react";
-//import { Link } from react-dom-router;
+import { Link } from "react-router-dom";
 
 function AppNavBar() {
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-info mb-4">
       <div className="container">
         <h3>
-          <a className="nav-brand text-light" href="!#">
+          <Link to="/" className="nav-brand text-light">
             ConnectX
-          </a>
+          </Link>
           {"      "}
           <i className="fas fa-grip-lines-vertical text-light" />
         </h3>
