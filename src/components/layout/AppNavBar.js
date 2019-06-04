@@ -7,10 +7,9 @@ function AppNavBar() {
       <div className="container">
         <h3>
           <Link to="/" className="nav-brand text-light">
-            ConnectX
+            CanaanJobs
           </Link>
           {"      "}
-          <i className="fas fa-grip-lines-vertical text-light" />
         </h3>
         <button
           className="navbar-toggler"

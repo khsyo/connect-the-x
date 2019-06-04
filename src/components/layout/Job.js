@@ -19,15 +19,15 @@ class Job extends Component {
     const { jobs } = this.props;
 
     return (
-      <div className="container">
-        <h1>
+      <div className="container col-md-10 col-sm-12">
+        <h1 className="mb-4">
           Job Listings <i className="fas fa-arrow-up" />
         </h1>
         <div className="row">
           {jobs
             ? jobs.map(j => {
                 return (
-                  <div className="col-4 mb-4" key={j.id}>
+                  <div className="col-md-4 col-sm-6 mb-4" key={j.id}>
                     <div className="card">
                       <div className="card-header text-info font-weight-bold">
                         {j.title}
