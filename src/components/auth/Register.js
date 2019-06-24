@@ -8,6 +8,8 @@ import { notifyUser } from "../actions/notifyActions";
 
 class Register extends Component {
   state = {
+    isCompany: true,
+    isJobSeeker: false,
     email: "",
     password: ""
   };
@@ -40,14 +42,22 @@ class Register extends Component {
       .then(success => {
         var user = firebase.auth().currentUser;
 
+        // Handle redirect after email verified
+        var actionCodeSettings = {
+          url: "localhost:3000/?email=" + firebase.auth().currentUser.email,
+          handleCodeInApp: false
+        };
+
         user
-          .sendEmailVerification()
+          .sendEmailVerification(actionCodeSettings)
           .then(() => {})
-          .catch(err => notifyUser("Verification email failed", "error"));
+          .catch(err => {
+            notifyUser("Verification email failed", "error");
+            console.log("Email verification failed");
+          });
+        this.props.history.push("/");
       })
       .catch(err => notifyUser("That user already exists", "error"));
-
-    this.props.history.push("/");
   };
 
   render() {
@@ -57,7 +67,11 @@ class Register extends Component {
         <div className="col-md-4 mx-auto">
           <div className="card">
             <div className="card-body">
-              {message ? <h6>{messageType}</h6> : null}
+              {message ? (
+                <h6 className="text-danger">
+                  {messageType}: {message}
+                </h6>
+              ) : null}
               <h1 className="text-center pb-4 pt-3">
                 <span className="text-info">
                   <i className="fas fa-lock" /> Sign Up

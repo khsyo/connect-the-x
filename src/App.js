@@ -9,6 +9,7 @@ import { UserIsAuthenticated, UserIsNotAuthenticated } from "./helpers/auth";
 import AppNavBar from "./components/layout/AppNavBar";
 import Job from "./components/layout/Job";
 import JobDetail from "./components/layout/JobDetail";
+import AddJob from "./components/layout/AddJob";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 
@@ -31,6 +32,7 @@ function App() {
               path="/login"
               component={UserIsNotAuthenticated(Login)}
             />
+            <Route exact path="/add" component={UserIsAuthenticated(AddJob)} />
           </Switch>
         </div>
       </Router>

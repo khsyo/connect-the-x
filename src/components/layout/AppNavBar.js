@@ -22,7 +22,6 @@ class AppNavBar extends Component {
   onLogout = e => {
     e.preventDefault();
     //handle logout
-    const { email, password } = this.props.auth;
     const { firebase } = this.props;
 
     firebase
@@ -60,9 +59,9 @@ class AppNavBar extends Component {
                 <ul className="navbar-nav d-flex justify-content-around">
                   <li className="nav-item text-white nav-link">{auth.email}</li>
                   <li className="nav-item">
-                    <a href="!#" className="nav-link text-light">
+                    <Link to="/add" className="nav-link text-light">
                       Post a job
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a href="!#" className="nav-link text-light">

@@ -41,6 +41,10 @@ class Login extends Component {
       .catch(err => notifyUser("Incorrect login credentials", "error"));
   };
 
+  handleForgotPassword = e => {
+    e.preventDefault();
+  };
+
   render() {
     const { message, messageType } = this.props.notify;
     return (
@@ -92,7 +96,9 @@ class Login extends Component {
                 </span>
                 <br />
                 <span>
-                  <Link>Forgot password...</Link>
+                  <a href="#!" onClick={this.handleForgotPassword}>
+                    Forgot password...
+                  </a>
                 </span>
               </div>
             </div>

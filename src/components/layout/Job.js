@@ -19,7 +19,7 @@ class Job extends Component {
     const { jobs } = this.props;
 
     return (
-      <div className="container col-md-10 col-sm-12">
+      <div className="container col-md-9 col-sm-12">
         <h1 className="mb-4">
           Job Listings <i className="fas fa-arrow-up" />
         </h1>
