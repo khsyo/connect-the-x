@@ -5,7 +5,7 @@ class AddSkills extends Component {
     skillsList: [""]
   };
 
-  onChange = key => e => {
+  onSkillChange = key => e => {
     const newSkillsList = this.state.skillsList.map((skill, skey) => {
       if (skey !== key) return skill;
       skill = e.target.value;
@@ -14,7 +14,7 @@ class AddSkills extends Component {
     this.setState({
       skillsList: newSkillsList
     });
-    console.log(this.state.skillsList);
+    // console.log(this.state.skillsList);
   };
 
   addSkill = e => {
@@ -40,6 +40,11 @@ class AddSkills extends Component {
     }
   };
 
+  passStateToAddJob = () => {
+    const skillsList = this.state;
+    this.props.fetchDataFromAddSkills(skillsList);
+  };
+
   render() {
     const skillsUI = this.state.skillsList.map((skill, i) => (
       <li className="list-item mb-1" key={i}>
@@ -47,7 +52,7 @@ class AddSkills extends Component {
           type="text"
           value={skill}
           name="skill"
-          onChange={this.onChange(i)}
+          onChange={this.onSkillChange(i)}
           className="border border-secondary"
         />
         <i className="fas fa-plus ml-2 text-success" onClick={this.addSkill} />

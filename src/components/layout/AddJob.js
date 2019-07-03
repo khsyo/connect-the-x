@@ -14,7 +14,8 @@ class AddJob extends Component {
     salary: "",
     city: "",
     country: "",
-    jobDescription: ""
+    jobDescription: "",
+    skillsList: ""
   };
 
   onChange = e => {
@@ -27,6 +28,7 @@ class AddJob extends Component {
   onSubmit = e => {
     e.preventDefault();
     //Handle form submit request, data should flow into firestore
+    console.log(this.state);
   };
 
   // componentDidMount() { //DOESN"T WORK
@@ -36,6 +38,12 @@ class AddJob extends Component {
   //   });
   //   console.log(companyName);
   // }
+
+  callbackAddSkills = e => {
+    this.setState({
+      skillsList: [...e]
+    });
+  };
 
   static getDerivedStateFromProps(props, state) {
     const { companyName } = props.profile;
@@ -125,7 +133,7 @@ class AddJob extends Component {
               <div className="row">
                 <div className="form-group col-md-6">
                   <h6>Skills Requirement</h6>
-                  <AddSkills />
+                  <AddSkills fetchDataFromAddSkills={this.callbackAddSkills} />
                 </div>
               </div>
 
@@ -133,6 +141,7 @@ class AddJob extends Component {
                 className="btn btn-info mx-auto"
                 type="submit"
                 value="Post a job"
+                onClick={this.onSubmit}
               />
             </form>
           </div>
