@@ -30,7 +30,7 @@ class Job extends Component {
                   <div className="col-md-4 col-sm-6 mb-4" key={j.id}>
                     <div className="card">
                       <div className="card-header text-info font-weight-bold">
-                        {j.title}
+                        {j.jobTitle}
                       </div>
                       <div className="card-body">
                         <strong>{j.hiringCompany}</strong>

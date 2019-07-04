@@ -11,7 +11,7 @@ import JobImageSmall from "../job-hero-banner-320W.jpg";
 class JobDetail extends Component {
   handleClick = e => {
     const { job } = this.props;
-    console.log(job.title);
+    console.log(job.jobTitle);
   };
   render() {
     const { job } = this.props;
@@ -29,7 +29,7 @@ class JobDetail extends Component {
           <div className="row mb-2 col-sm-12 col-md-12 pl-0 d-flex justify-content-center">
             <h4 className="col-sm-8">
               <span className="text-info">We are looking for: </span>{" "}
-              {job.title}
+              {job.jobTitle}
             </h4>
             <div className="col-sm-4 bg-success text-white d-flex flex-column justify-content-center">
               Expected salary: RM {job.salary}
@@ -42,24 +42,13 @@ class JobDetail extends Component {
           </div>
           <div className="row col-sm-6">
             <h5 className="text-info">Job Description: </h5>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p>{job.jobDescription}</p>
           </div>
           <div className="row col-sm-6">
             <h5 className="text-info">Skills Required: </h5>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, hasaiuasdfiua sdfiuafsiuasdf</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
+
+            <ul style={{ display: "inline-block" }}>
+              {job.skillsList ? job.skillsList.map(s => <li>{s}</li>) : null}
             </ul>
           </div>
 

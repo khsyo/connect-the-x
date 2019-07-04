@@ -2,21 +2,24 @@ import React, { Component } from "react";
 //import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firebaseConnect } from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase";
 import PropTypes from "prop-types";
 
 import AddSkills from "./AddSkills";
 
 class AddJob extends Component {
-  state = {
-    companyName: "",
-    jobTitle: "",
-    salary: "",
-    city: "",
-    country: "",
-    jobDescription: "",
-    skillsList: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hiringCompany: "",
+      jobTitle: "",
+      salary: "",
+      city: "",
+      country: "",
+      jobDescription: "",
+      skillsList: [""]
+    };
+  }
 
   onChange = e => {
     //handle change in user input
@@ -28,7 +31,10 @@ class AddJob extends Component {
   onSubmit = e => {
     e.preventDefault();
     //Handle form submit request, data should flow into firestore
-    console.log(this.state);
+    const newJob = this.state;
+    const { history, firestore } = this.props;
+
+    firestore.add({ collection: "jobs" }, newJob).then(() => history.push("/"));
   };
 
   // componentDidMount() { //DOESN"T WORK
@@ -39,19 +45,47 @@ class AddJob extends Component {
   //   console.log(companyName);
   // }
 
-  callbackAddSkills = e => {
+  onSkillChange = key => e => {
+    const newSkillsList = this.state.skillsList.map((skill, skey) => {
+      if (skey !== key) return skill;
+      skill = e.target.value;
+      return skill;
+    });
     this.setState({
-      skillsList: [...e]
+      skillsList: newSkillsList
     });
   };
 
+  addSkill = e => {
+    e.preventDefault();
+    //Add another skill input
+    let newSkillsList = [...this.state.skillsList, ""];
+    this.setState({
+      skillsList: newSkillsList
+    });
+  };
+
+  deleteSkill = i => {
+    //handling delete skill
+    if (this.state.skillsList.length > 1) {
+      let deletedSkillsList = this.state.skillsList.filter(
+        (skill, j) => i !== j
+      );
+      this.setState({
+        skillsList: deletedSkillsList
+      });
+    } else {
+      alert("Pls insert at least one skill!");
+    }
+  };
+
   static getDerivedStateFromProps(props, state) {
-    const { companyName } = props.profile;
-    return { companyName };
+    const { hiringCompany } = props.profile;
+    return { hiringCompany };
   }
 
   render() {
-    const { companyName } = this.state;
+    const { hiringCompany } = this.state;
     return (
       <div className="row col-md-12 mx-auto">
         <div className="card col-md-10 px-0 mx-auto">
@@ -60,15 +94,15 @@ class AddJob extends Component {
             <form className="d-flex flex-column" onSubmit={this.onSubmit}>
               <div className="row d-flex justify-content-start">
                 <div className="form-group col-md-3">
-                  <label htmlFor="companyName">Company Name</label>
+                  <label htmlFor="hiringCompany">Company Name</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="companyName"
+                    name="hiringCompany"
                     required
                     //this ensure the component starts as a controlled component
                     //& doesn't yield undefined result
-                    value={companyName == null ? "" : companyName}
+                    value={hiringCompany == null ? "" : hiringCompany}
                     readOnly
                   />
                 </div>
@@ -105,6 +139,7 @@ class AddJob extends Component {
                     id="city"
                     name="city"
                     required
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group col-md-3">
@@ -115,6 +150,7 @@ class AddJob extends Component {
                     id="country"
                     name="country"
                     required
+                    onChange={this.onChange}
                   />
                 </div>
               </div>
@@ -127,13 +163,19 @@ class AddJob extends Component {
                     id="jobDescription"
                     name="jobDescription"
                     rows="5"
+                    onChange={this.onChange}
                   />
                 </div>
               </div>
               <div className="row">
                 <div className="form-group col-md-6">
                   <h6>Skills Requirement</h6>
-                  <AddSkills fetchDataFromAddSkills={this.callbackAddSkills} />
+                  <AddSkills
+                    skills={this.state.skillsList}
+                    handleSkillChange={this.onSkillChange}
+                    handleAddSkill={this.addSkill}
+                    handleDeleteSkill={this.deleteSkill}
+                  />
                 </div>
               </div>
 
@@ -157,7 +199,7 @@ AddJob.propTypes = {
 };
 
 export default compose(
-  firebaseConnect(),
+  firestoreConnect(),
   connect((state, props) => ({
     auth: state.firebase.auth,
     profile: state.firebase.profile
