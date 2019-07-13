@@ -18,7 +18,7 @@ class JobDetail extends Component {
 
     if (job) {
       return (
-        <div className="container col-sm-12 col-md-9">
+        <div className="container col-sm-12 col-md-9 border border-light pt-3">
           <div className="embed-responsive-4by3 mb-2">
             <img
               srcSet={`${JobImageLarge} 1280w, ${JobImageMedium} 640w, ${JobImageSmall} 320w`}
@@ -40,14 +40,14 @@ class JobDetail extends Component {
             {"  -  "}
             {job.city}, {job.country}
           </div>
-          <div className="row col-sm-6">
+          <div className="row col-sm-6 d-flex flex-column">
             <h5 className="text-info">Job Description: </h5>
             <p>{job.jobDescription}</p>
           </div>
-          <div className="row col-sm-6">
+          <div className="row col-sm-6 d-flex flex-column">
             <h5 className="text-info">Skills Required: </h5>
 
-            <ul style={{ display: "inline-block" }}>
+            <ul>
               {job.skillsList ? job.skillsList.map(s => <li>{s}</li>) : null}
             </ul>
           </div>

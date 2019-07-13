@@ -7,11 +7,14 @@ import store from "./store";
 import { UserIsAuthenticated, UserIsNotAuthenticated } from "./helpers/auth";
 
 import AppNavBar from "./components/layout/AppNavBar";
-import Job from "./components/layout/Job";
+import Footer from "./components/layout/Footer";
+import Home from "./components/layout/Home";
 import JobDetail from "./components/layout/JobDetail";
 import AddJob from "./components/layout/AddJob";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+
+import css from "./App.css";
 
 function App() {
   return (
@@ -20,7 +23,7 @@ function App() {
         <div className="App">
           <AppNavBar />
           <Switch>
-            <Route exact path="/" component={Job} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/job/:id" component={JobDetail} />
             <Route
               exact
@@ -34,6 +37,7 @@ function App() {
             />
             <Route exact path="/add" component={UserIsAuthenticated(AddJob)} />
           </Switch>
+          <Footer />
         </div>
       </Router>
     </Provider>

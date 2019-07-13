@@ -20,9 +20,6 @@ class Job extends Component {
 
     return (
       <div className="container col-md-9 col-sm-12">
-        <h1 className="mb-4">
-          Job Listings <i className="fas fa-arrow-up" />
-        </h1>
         <div className="row">
           {jobs
             ? jobs.map(j => {

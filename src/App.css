@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+.header {
+  height: 80vh;
+  background-image: url("./components/hero-banner.jpg");
+  background-size: cover;
+  background-position: bottom;
+  position: relative;
+  margin: 0 10px 10px 10px;
+}
+
+.header--primary-text {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.footer {
+  height: 10vh;
+  position: relative;
+}
+
+.social-box {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+}
+
+a#facebook:visited,
+a#facebook:active {
+  text-decoration: none;
+  color: #000;
+}
+
+.fa-facebook {
+  font-size: 1.5rem;
+}
