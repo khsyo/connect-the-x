@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/connect-the-x/static/css/main.ad65400c.chunk.css",
+    "main.js": "/connect-the-x/static/js/main.098cda8f.chunk.js",
+    "main.js.map": "/connect-the-x/static/js/main.098cda8f.chunk.js.map",
+    "runtime~main.js": "/connect-the-x/static/js/runtime~main.d89b0f77.js",
+    "runtime~main.js.map": "/connect-the-x/static/js/runtime~main.d89b0f77.js.map",
+    "static/js/2.52021481.chunk.js": "/connect-the-x/static/js/2.52021481.chunk.js",
+    "static/js/2.52021481.chunk.js.map": "/connect-the-x/static/js/2.52021481.chunk.js.map",
+    "index.html": "/connect-the-x/index.html",
+    "precache-manifest.489fb423b81055bac29e00197b0ab07d.js": "/connect-the-x/precache-manifest.489fb423b81055bac29e00197b0ab07d.js",
+    "service-worker.js": "/connect-the-x/service-worker.js",
+    "static/css/main.ad65400c.chunk.css.map": "/connect-the-x/static/css/main.ad65400c.chunk.css.map",
+    "static/media/App.css": "/connect-the-x/static/media/hero-banner.7a25f199.jpg",
+    "static/media/job-hero-banner-320W.jpg": "/connect-the-x/static/media/job-hero-banner-320W.9325e4fc.jpg",
+    "static/media/job-hero-banner-480W.jpg": "/connect-the-x/static/media/job-hero-banner-480W.9b2c7ace.jpg",
+    "static/media/job-hero-banner-720W.jpg": "/connect-the-x/static/media/job-hero-banner-720W.60a740d1.jpg",
+    "static/media/spinner.gif": "/connect-the-x/static/media/spinner.8b9a5cd1.gif"
+  }
+}
